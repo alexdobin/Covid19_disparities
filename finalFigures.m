@@ -70,14 +70,14 @@ mat1=[table1.CasesPer1000/10, 100-table1.White, table1.Black, table1.Hispanic, t
 metr1={'Attack rate', 'Minority', 'Black', 'Hispanic', 'Asian', ...
        'Per capita income', 'Household income', 'Below poverty line', 'Age', 'Travel time to work'};
 
-cmat1=round(corr(mat1)*100)/100;   
+cmat1=corr(mat1);   
 for ii=1:length(cmat1)
     cmat1(ii,ii)=NaN;
 end
 
 iFig=1030;
 myFigure(iFig)
-hHeatmap=heatmap(metr1, metr1, cmat1, 'FontSize', 20);
+hHeatmap=heatmap(metr1, metr1, cmat1, 'FontSize', 20, 'CellLabelFormat', '%0.2f');
 gca1=get(gca);
 pos1=gca1.Position;
 pos1=[max(pos1(1:2)) max(pos1(1:2)) min(pos1(3:4)) min(pos1(3:4))];

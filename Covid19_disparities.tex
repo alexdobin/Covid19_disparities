@@ -10,7 +10,7 @@
 
 \title{Racial/ethnic and socioeconomic disparities of Covid-19 attacks rates in Suffolk county communities.}
 \author[1]{Daniel Dobin}
-\author[2]{Alexander Dobin}
+\author[2]{Alexander Dobin  \thanks{dobin@cshl.edu}}
 \affil[1]{Candlewood Middle School, New York, USA}
 \affil[2]{Cold Spring Harbor Laboratory, New York, USA}
 \date{}
@@ -19,7 +19,7 @@
 \maketitle
 
 \begin{abstract}
-We investigated the dependence of Covid-19 attack rates on demographic and socioeconomic factors for the communities in Suffolk county (Long Island, New York State), presently the 5th most affected county in the United States. We found that the attack rate is strongly correlated with the minority population percentage, confirming the previous observations that minorities are severely affected by the Covid-19 disease.
+We investigated the dependence of Covid-19 attack rates on demographic and socioeconomic factors for the communities in Suffolk county (Long Island, New York State), presently the 5th most affected county in the United States. Confirming the previous observations that minorities are disproportionately impacted by the Covid-19 disease, we found that the attack rate is strongly correlated with the minority population percentage, with an alarmingly high 4.1-fold attack rate increase for Black and Hispanic populations.
 \end{abstract}
 
 \section{Introduction.}
@@ -38,73 +38,32 @@ In this work, we investigated the dependence of Covid-19 attack rate on racial/e
 We have collected the Covid-19 attack rate data on the Suffolk county Department of Health Services interactive \href{https://gis.suffolkcountyny.gov/portal/apps/opsdashboard/index.html#/76a26a0c83634266aa9efc35bd4f1975}{web-map} on April 10-11 \cite{SuffolkWebMap}.
 The attack rate is defined as the total number of positive cases in a community divided by the total population of the community. Next, we collected demographic and economic data for each community from the \href{{censusreporter.org}}website {censusreporter.org} website \cite{CensusReporter}.
 This information was sourced from the \href{https://www.census.gov/newsroom/press-releases/2019/acs-5-year.html}{2014-2018 American Community Survey} \cite{ACS}.  The following metrics were considered: \% of White, Black, Hispanic and Asian residents, median age, per capita income, median household income, \% of persons below poverty level, mean travel time to work.
-We restricted our analyses to the 128 communities with populations greater than 1000 persons. For analyses, we utilized standard statistical and plotting functions in Matlab. The collected data and code are available on GitHub:
-
-%\begin{wrapfigure}{L}{0.7\linewidth}
-\begin{figure}[b!]
-  \begin{center}
-  \textbf{Figure 1}
-
-  \includegraphics[width=0.6\linewidth]{AttackRateVsMinorityPopulation.pdf}
-  \end{center}
-
-  \caption{Covid-19 Attack rate vs. Minority population percentage. The circles represent communities, the solid red line is a linear least squares fit to the data, the dashed magenta lines represent the 95\% confidence bands of the fit obtained by bootstrapping (10000 samples).}
-
-  \label{fig:AttackRateVsMinority}
-\end{figure}
-%\end{wrapfigure}
+We restricted our analyses to the 128 communities with populations greater than 1000 persons. We utilized standard statistical and plotting functions in Matlab; confidence intervals for all estimates were caclulated by bootstrapping with 10000 samples. The data table and code are available on GitHub: \url{https://github.com/alexdobin/Covid19_disparities}.
 
 \section{Results.}
 
-In Figure \ref{fig:AttackRateVsMinority} we plotted the Covid-19 Attack Rate vs. the Minority Population proportion in each community.
-We observed a high correlation of Attack Rate with the Minority Population percentage, with the Pearson correlation coefficient
-$R=0.61$,
+In Figure \ref{fig:AttackRateVsMinority} we plotted the Covid-19 attack rate vs. the minority population percentage in each community.
+Attack rate correlates highly with the minority population proportion: Pearson correlation coefficient $R=0.61$,
 %p-value $p=2 \cdot 10^{-14}$,
-$95\%$ confidence interval $[0.41-0.75]$.
-Performing the linear least-squares fit to the data we estimated that the attack rate for the minorities is 4.1 times higher than that for the whites ($95\%$ confidence interval $[2.6-6.1]$).
-We note that this ratio is higher than those that can be derived from the previuous reports of racical/ethnic composition of fatalities in New York City
+$95\%$ confidence interval $[0.41,0.75]$.
+Performing the linear least-squares fit to the data, we estimated that the attack rate for the minorities is 4.1 times higher than that for the whites ($95\%$ confidence interval $[2.6,6.1]$).
+We note that this ratio is higher than ratios that can be derived from the previuous reports of racical/ethnic composition of fatalities in New York City
 $(28\%+34\%)/(22\%+29\%) \approx 1.2$
 \cite{NYS_COVID19_tracker} and hospitalized patients across the US $ 33\%/18\% \approx 1.8 $ \cite{COVID-NET_2020}.
 
-\begin{figure*}[b!]
-    \hspace{3cm} \textbf{Figure 2A} \hfill \textbf{Figure 2B} \hspace{3cm}
-
-  \includegraphics[width=0.48\linewidth]{AttackRateVsIncomePerCapita.pdf}
-  \hfill
-  \includegraphics[width=0.48\linewidth]{IncomePerCapitaVsMinorityPopulation.pdf}
-  \caption[Attack rate vs Income]{A: Attack rate vs. Per capita Income. Circles represent communities, their color scale corresponds to the percentage of the Minority population in each community.
-
-  B: Per capita income vs. Minority population percentage. The curved red line represents the quadratic least squares fit.
-  }
-  \label{fig:AttackRateVsIncomePerCapita}
-\end{figure*}
-
-\begin{figure*}
-    \hspace{3cm} \textbf{Figure 3A} \hfill \textbf{Figure 3B} \hspace{3cm}
-
-  \includegraphics[width=0.5\linewidth]{CorrelationMatrix.png}
-  \hfill
-  \includegraphics[width=0.45\linewidth]{RvsAllPredcitors.pdf}
-  \caption[Correlations with multiple predictors]{A: Matric of pairwise Pearson correlation coefficients between the predictor demographic varaibles and attack rate.
-
-  B: Pearson correlation of attack rate with different predictors. Error bars represent the 95\% confidence intervals calculated using bootstrapping (10000 samples).
-  }
-  \label{fig:CorrelationMatrix}
-\end{figure*}
-
 In Figure \ref{fig:AttackRateVsIncomePerCapita}A we plotted Covid-19 attack rate vs. per capita income.
 We observe that low-income communities have higher attack rates than high-income communities.
-However, as shown in figure 2B, the Per capita income is itself strongly anti-correlated with the Minority population proportion.
-For communities with Minority populations $<20\%$, we found no signifcant correlation between Attack rate and Per capita income: $R=0.14$, $95\%$ confidence interval $[-0.06, 0.45]$.
+However, as shown in figure 2B, the per capita income is itself strongly anti-correlated with the minority population proportion.
+For communities with minority populations $<20\%$, we found no signifcant correlation between attack rate and per capita income: $R=0.14$, $95\%$ confidence interval $[-0.06,0.45]$.
 
 This multicollinearity is also observed for other demographic and economic predictor variables in our study.
 Figure \ref{fig:CorrelationMatrix}A shows pairwise correlation coefficients between the predictor variables, as well as attack rate and predictor variables.
-We see a strong positive correlation of minority population percentage with Per capita income, Mean household income, and Age, and a positive correlation with proportion of Persons below the poverty line, and the same trends are observed in the dependence of attack rate on these predictors.
-Figure \ref{fig:CorrelationMatrix}B shows that the Minortiy population proportion has the highest absolute correlation with the attack rate. The attack rates are correlated with Black and Hispanic population proportions equally strongly. The Asian population proportion and Travel time to work do not correlate significantly with the attack rate, though this may be owing to the narrow range of these variables in the communities under study.
-We also investigated multilinear regression of the attack rates with all pairs of predictor varaibles, and found that none increased the correlation statistically significantly, which indicates that our study is not powered to discern separate contributions of these demographic variables.
+We see a strong naegative correlation of minority population percentage with per capita income, mean household income, and age, and a positive correlation with proportion of persons below the poverty line, and the same trends are observed in the dependence of attack rate on these predictors.
+Figure \ref{fig:CorrelationMatrix}B shows that the minortiy population proportion has the highest absolute correlation with the attack rate. The attack rates are correlated with Black and Hispanic population proportions equally strongly. The Asian population proportion and travel time to work do not correlate significantly with the attack rate, though this may be owing to the narrow range of these variables in the communities under study.
+We also investigated multilinear regression of the attack rates with all pairs of predictor varaibles, and found that none of them increased the correlation statistically significantly, which indicates that our study is not powered to discern separate contributions of these demographic and socioeconomic variables.
 
 \section{Discussion.}
-In this study, we investigated the dependence of the Covid-19 attack rate on the several demographic and economic factors in the Suffolk county communities. Among all the variables, the percentage of the Minority population in a community was the best predictor of Covid-19 attack rate. Unlike other approaches, which utilize the demographics of the infected patients, our study estimates the attack rate dependence on race/ethnicity by correlating it with the racial/ethnic composition of communities. While the former approaches are more direct, our approach is more informative for assessing hardships and disparities affecting the minority communities.
+In this study, we investigated the dependence of the Covid-19 attack rate on the several demographic and economic factors in the Suffolk county communities. Among all the variables, the percentage of the minority population in a community was the best predictor of Covid-19 attack rate. Unlike other approaches, which utilize the demographics of the infected patients, our study estimates the attack rate dependence on race/ethnicity by correlating it with the racial/ethnic composition of communities. While the former approaches are more direct, our approach is more informative for assessing hardships and disparities affecting the minority communities.
 
 Our work does \textbf{not} utilize any genetic information and hence does \textbf{not} point to any genetic basis in the racial/ethnic disparities of the Covid-19 infection. The racial/ethnic and socioeconomic inequities have been widely documented for other diseases and are attributed to a multitude of health and environmental causes, such as limited access to healthcare, lack of health insurance, pre-existing conditions, substandard housing, and hazardous work. In the case of Covid-19 pandemic, these hardships are further exacerbated by the higher economic stress for Minority communities resulting in diminished capacity for social distancing which is imperative to suppress the spread of the novel coronavirus. In addition, minorities constitute a large proportion of essential workers, further increasing their exposure to Covid-19 infection.
 
@@ -112,4 +71,63 @@ Our main finding is that the Covid-19 attack rate for Black and Hispanic populat
 
 \bibliographystyle{unsrt}
 \bibliography{Covid19_disparities}
+
+\newpage
+%\@fpsep\textheight
+%\begin{wrapfigure}{L}{0.7\linewidth}
+\begin{figure}[t!]
+  \begin{center}
+  \textbf{Figure 1}
+
+  \includegraphics[width=0.6\linewidth]{AttackRateVsMinorityPopulation.pdf}
+  \end{center}
+
+  \caption{Covid-19 attack rate vs. minority population percentage. The circles represent communities, the solid red line is a linear least squares fit to the data, the dashed magenta lines represent the 95\% confidence bands of the fit obtained by bootstrapping (10000 samples).}
+
+  \label{fig:AttackRateVsMinority}
+\end{figure}
+%\end{wrapfigure}
+\clearpage
+
+\begin{figure*}
+    \hspace{3cm} \textbf{Figure 2A} \hfill \textbf{Figure 2B} \hspace{3cm}
+
+  \includegraphics[width=0.48\linewidth]{AttackRateVsIncomePerCapita.pdf}
+  \hfill
+  \includegraphics[width=0.48\linewidth]{IncomePerCapitaVsMinorityPopulation.pdf}
+  \caption[Attack rate vs Income]{A: attack rate vs. per capita income. Circles represent communities, their color scale corresponds to the percentage of the minority population in each community.
+
+  B: Per capita income vs. minority population percentage. The curved red line represents the quadratic least squares fit.
+  }
+  \label{fig:AttackRateVsIncomePerCapita}
+\end{figure*}
+
+\clearpage
+
+\begin{figure*}
+    \label{fig:CorrelationMatrix}
+
+    \caption[Correlations with multiple predictors]
+    {A: Matrix of pairwise Pearson correlation coefficients between the predictor variables and attack rate.
+
+    B: Pearson correlation of attack rate with different predictors. Error bars represent the 95\% confidence intervals calculated using bootstrapping (10000 samples).
+    }
+    \vspace{3mm}
+    %\centering
+    %\hspace{3cm} \textbf{Figure 3A} \hfill \textbf{Figure 3B} \hspace{3cm}
+    \textbf{Figure 3A}
+
+    \vspace{-8mm}
+    \begin{center}
+        \includegraphics[width=0.75\linewidth]{CorrelationMatrix.png}
+    \end{center}
+  %\hfill
+  \textbf{Figure 3B}
+  \vspace{-1cm}
+  \begin{center}
+      \includegraphics[width=0.5\linewidth]{RvsAllPredcitors.pdf}
+  \end{center}
+
+\end{figure*}
+
 \end{document}
